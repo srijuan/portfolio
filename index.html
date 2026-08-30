@@ -530,10 +530,23 @@ nav {
 /* PROJECTS */
 .projgrid { display:grid; grid-template-columns:repeat(2,1fr); gap:3px; }
 .prj {
+  position:relative; overflow:hidden;
   background:var(--k); color:var(--w);
-  padding:40px 32px; cursor:pointer; transition:opacity .15s;
+  padding:40px 32px; cursor:pointer;
+  min-height:440px;
 }
-.prj:hover { opacity:.75; }
+.prj .prj-cover {
+  position:absolute; inset:0; z-index:0;
+  background-size:cover; background-position:center;
+  filter:grayscale(.35) brightness(.3);
+  transform:scale(1.02);
+  transition:filter .45s ease, transform .45s ease;
+}
+.prj:hover .prj-cover {
+  filter:grayscale(0) brightness(.82);
+  transform:scale(1.06);
+}
+.prj > *:not(.prj-cover) { position:relative; z-index:1; }
 .pnum {
   font-size:11px; font-weight:700; letter-spacing:.3em;
   font-family:"Barlow",sans-serif; opacity:.4; margin-bottom:14px;
@@ -795,7 +808,7 @@ nav {
 
   /* PROJECTS */
   .projgrid { grid-template-columns: 1fr; }
-  .prj { padding: 28px 22px; }
+  .prj { padding: 28px 22px; min-height: 340px; }
   .ptitle { font-size: 26px; }
 
   /* PROJECT OVERLAY */
@@ -1156,6 +1169,7 @@ nav {
 
         <!-- Project 01: Porsche Engineering Marketing (opens dedicated page) -->
         <div class="prj" onclick="openProject(1)">
+          <div class="prj-cover" style="background-image:url('covers/porsche-eng.jpg');"></div>
           <div class="pnum">Project 01</div>
           <div class="ptitle">Porsche Engineering Marketing</div>
           <div class="pdesc">Marketing graphics for Porsche Engineering North America.</div>
@@ -1164,6 +1178,7 @@ nav {
 
         <!-- Project 02: Fare (standalone page, VCR glitch transition) -->
         <div class="prj" onclick="openProject(7)">
+          <div class="prj-cover" style="background-image:url('covers/fare.jpg');"></div>
           <div class="pnum">Project 02</div>
           <div class="ptitle">Fare</div>
           <div class="pdesc">Horror Short Film</div>
@@ -1172,6 +1187,7 @@ nav {
 
         <!-- Project 03: Password protected -->
         <div class="prj" onclick="openProject(2)">
+          <div class="prj-cover" style="background-image:url('covers/prototype.jpg');"></div>
           <div class="pnum">Project 03</div>
           <div class="ptitle">Porsche Prototype Marketing</div>
           <div class="pdesc">Marketing development for Porsche prototypes.</div>
@@ -1180,6 +1196,7 @@ nav {
 
         <!-- Project 04: Video -->
         <div class="prj" onclick="openProject(3)">
+          <div class="prj-cover" style="background-image:url('covers/video.jpg');"></div>
           <div class="pnum">Project 04</div>
           <div class="ptitle">Porsche Engineering Video</div>
           <div class="pdesc">Onboarding video development for Porsche Engineering North America.</div>
@@ -1188,6 +1205,7 @@ nav {
 
         <!-- Project 05: Porsche 963 Apple Heritage (opens dedicated page) -->
         <div class="prj" onclick="openProject(4)">
+          <div class="prj-cover" style="background-image:url('covers/963.jpg');"></div>
           <div class="pnum">Project 05</div>
           <div class="ptitle">Porsche 963 Apple Heritage</div>
           <div class="pdesc">Concept art and graphics for the Porsche 963 Apple heritage livery ahead of Laguna Seca.</div>
@@ -1196,6 +1214,7 @@ nav {
 
         <!-- Project 06: MIT Alumni Event (opens dedicated page) -->
         <div class="prj" onclick="openProject(5)">
+          <div class="prj-cover" style="background-image:url('covers/mit.jpg');"></div>
           <div class="pnum">Project 06</div>
           <div class="ptitle">MIT Alumni Event</div>
           <div class="pdesc">Alumni event coordination and demonstration design for Porsche Engineering North America.</div>
@@ -1204,6 +1223,7 @@ nav {
 
         <!-- Project 07: Development -->
         <div class="prj" onclick="openProject(6)">
+          <div class="prj-cover" style="background-image:url('covers/voce.jpg');"></div>
           <div class="pnum">Project 07</div>
           <div class="ptitle">Voce</div>
           <div class="pdesc">Marketing campaign for Voce LLC.</div>

@@ -951,7 +951,7 @@ nav {
 
   <div class="page-frame">
     <div class="inner">
-      <div class="plabel">004 &mdash; Projects</div>
+      <div class="plabel">005 &mdash; Projects</div>
       <div class="phead">Porsche 963 Apple Heritage</div>
       <div class="pdiv"></div>
 
@@ -985,7 +985,7 @@ nav {
 
   <div class="page-frame">
     <div class="inner">
-      <div class="plabel">005 &mdash; Projects</div>
+      <div class="plabel">006 &mdash; Projects</div>
       <div class="phead">MIT Alumni Event</div>
       <div class="pdiv"></div>
 
@@ -1154,7 +1154,7 @@ nav {
       <div class="pdiv"></div>
       <div class="projgrid">
 
-        <!-- Project 1: Porsche Engineering Marketing (opens dedicated page) -->
+        <!-- Project 01: Porsche Engineering Marketing (opens dedicated page) -->
         <div class="prj" onclick="openProject(1)">
           <div class="pnum">Project 01</div>
           <div class="ptitle">Porsche Engineering Marketing</div>
@@ -1162,53 +1162,52 @@ nav {
           <div class="ptag">Graphics</div>
         </div>
 
-        <!-- Project 2: Password protected -->
-        <div class="prj" onclick="openProject(2)">
+        <!-- Project 02: Fare (standalone page, VCR glitch transition) -->
+        <div class="prj" onclick="openProject(7)">
           <div class="pnum">Project 02</div>
+          <div class="ptitle">Fare</div>
+          <div class="pdesc">Horror Short Film</div>
+          <div class="ptag">Film</div>
+        </div>
+
+        <!-- Project 03: Password protected -->
+        <div class="prj" onclick="openProject(2)">
+          <div class="pnum">Project 03</div>
           <div class="ptitle">Porsche Prototype Marketing</div>
           <div class="pdesc">Marketing development for Porsche prototypes.</div>
           <div class="ptag">Confidential &mdash; <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="vertical-align:-1px;margin-right:2px;"><rect x="4" y="11" width="16" height="10" rx="1.5" fill="#fff"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#fff" stroke-width="2" fill="none"/></svg></div>
         </div>
 
-        <!-- Project 3: Video -->
+        <!-- Project 04: Video -->
         <div class="prj" onclick="openProject(3)">
-          <div class="pnum">Project 03</div>
+          <div class="pnum">Project 04</div>
           <div class="ptitle">Porsche Engineering Video</div>
           <div class="pdesc">Onboarding video development for Porsche Engineering North America.</div>
           <div class="ptag">Video</div>
         </div>
 
-        <!-- Project 4: Porsche 963 Apple Heritage (opens dedicated page) -->
+        <!-- Project 05: Porsche 963 Apple Heritage (opens dedicated page) -->
         <div class="prj" onclick="openProject(4)">
-          <div class="pnum">Project 04</div>
+          <div class="pnum">Project 05</div>
           <div class="ptitle">Porsche 963 Apple Heritage</div>
           <div class="pdesc">Concept art and graphics for the Porsche 963 Apple heritage livery ahead of Laguna Seca.</div>
           <div class="ptag">Graphics</div>
         </div>
 
-        <!-- Project 5: Development -->
-        <!-- Project 5: MIT Alumni Event (opens dedicated page) -->
+        <!-- Project 06: MIT Alumni Event (opens dedicated page) -->
         <div class="prj" onclick="openProject(5)">
-          <div class="pnum">Project 05</div>
+          <div class="pnum">Project 06</div>
           <div class="ptitle">MIT Alumni Event</div>
           <div class="pdesc">Alumni event coordination and demonstration design for Porsche Engineering North America.</div>
           <div class="ptag">Event &mdash; <svg width="11" height="11" viewBox="0 0 24 24" fill="none" style="vertical-align:-1px;margin-right:2px;"><rect x="4" y="11" width="16" height="10" rx="1.5" fill="#fff"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="#fff" stroke-width="2" fill="none"/></svg></div>
         </div>
 
-        <!-- Project 6: Development -->
+        <!-- Project 07: Development -->
         <div class="prj" onclick="openProject(6)">
-          <div class="pnum">Project 06</div>
+          <div class="pnum">Project 07</div>
           <div class="ptitle">Voce</div>
           <div class="pdesc">Marketing campaign for Voce LLC.</div>
           <div class="ptag">Development</div>
-        </div>
-
-        <!-- Project 7: Fare -->
-        <div class="prj" onclick="openProject(7)">
-          <div class="pnum">Project 07</div>
-          <div class="ptitle">Fare</div>
-          <div class="pdesc">Horror Short Film</div>
-          <div class="ptag">Film</div>
         </div>
 
       </div>
@@ -1600,7 +1599,7 @@ const projectPasswords = {
 
 function openProject(id) {
   if (projectLinks[id]) {
-    window.location.href = projectLinks[id];
+    vcrGlitchTo(projectLinks[id]);
   } else if (projectPasswords[id]) {
     pendingProject = id;
     document.getElementById('pw-modal').style.display = 'flex';
@@ -1706,6 +1705,80 @@ function go(id) {
         <button onclick="event.stopPropagation();shiftLight(1)" style="position:absolute;right:24px;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:40px;cursor:pointer;opacity:.7;">&#8594;</button>
         <button onclick="closeLight()" style="position:absolute;top:20px;right:28px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;opacity:.7;">&#10005;</button>
       </div>
+
+<!-- ============ VCR GLITCH TRANSITION (Fare) ============ -->
+<style>
+#vcr-glitch{display:none;position:fixed;inset:0;z-index:9999;background:#000;overflow:hidden;cursor:none;}
+#vcr-glitch canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;opacity:.92;}
+#vcr-glitch .vcr-scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px);pointer-events:none;}
+#vcr-glitch .vcr-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 52%,rgba(0,0,0,.85) 100%);}
+#vcr-glitch .vcr-bar{position:absolute;left:0;right:0;height:13vh;background:linear-gradient(rgba(255,255,255,.02),rgba(255,255,255,.2),rgba(255,255,255,.02));mix-blend-mode:screen;animation:vcrTrack .85s steps(14) infinite;}
+#vcr-glitch .vcr-bar.b2{height:4vh;animation-duration:.45s;animation-direction:reverse;opacity:.65;}
+@keyframes vcrTrack{0%{top:112%}100%{top:-22%}}
+#vcr-glitch .vcr-osd{position:absolute;top:24px;left:28px;font-family:'Courier New',monospace;font-weight:700;font-size:clamp(16px,2.2vw,26px);color:#fff;letter-spacing:.14em;text-shadow:0 0 7px rgba(255,255,255,.75);animation:vcrBlink 1s steps(2) infinite;}
+#vcr-glitch .vcr-osd-br{top:auto;left:auto;bottom:26px;right:30px;animation:none;}
+@keyframes vcrBlink{50%{opacity:0;}}
+#vcr-glitch .vcr-title{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Courier New',monospace;font-weight:700;font-size:clamp(44px,10vw,130px);letter-spacing:.32em;text-indent:.32em;color:#fff;opacity:0;text-shadow:0 0 18px rgba(255,255,255,.5);animation:fareFlash 1s steps(1) .18s forwards;}
+#vcr-glitch .vcr-title .rgb{position:absolute;left:0;top:0;mix-blend-mode:screen;}
+#vcr-glitch .vcr-title .rgb.r{color:#f11;transform:translate(-5px,0);}
+#vcr-glitch .vcr-title .rgb.c{color:#0ee;transform:translate(5px,0);}
+@keyframes fareFlash{0%{opacity:0;}18%{opacity:1;transform:translate(-50%,-50%) skewX(0deg);}28%{transform:translate(-48%,-50%) skewX(9deg);}38%{transform:translate(-52%,-50%) skewX(-7deg);}50%{opacity:.35;}58%{opacity:1;transform:translate(-50%,-51%) skewX(3deg);}78%{transform:translate(-50%,-50%) skewX(0deg);}100%{opacity:1;}}
+</style>
+<div id="vcr-glitch" aria-hidden="true">
+  <canvas id="vcr-canvas"></canvas>
+  <div class="vcr-bar" style="top:24%;"></div>
+  <div class="vcr-bar b2" style="top:62%;"></div>
+  <div class="vcr-scan"></div>
+  <div class="vcr-vignette"></div>
+  <div class="vcr-osd">&#9654; PLAY</div>
+  <div class="vcr-osd vcr-osd-br" id="vcr-time">SP 0:00:00</div>
+  <div class="vcr-title">FARE<span class="rgb r" aria-hidden="true">FARE</span><span class="rgb c" aria-hidden="true">FARE</span></div>
+</div>
+<script>
+function vcrGlitchTo(url) {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.location.href = url;
+    return;
+  }
+  var ov = document.getElementById('vcr-glitch');
+  var cv = document.getElementById('vcr-canvas');
+  var ctx = cv.getContext('2d');
+  cv.width = Math.max(2, Math.floor(window.innerWidth / 3));
+  cv.height = Math.max(2, Math.floor(window.innerHeight / 3));
+  ov.style.display = 'block';
+  var t0 = performance.now();
+  var timeEl = document.getElementById('vcr-time');
+  var navigated = false;
+  function drawNoise() {
+    var img = ctx.createImageData(cv.width, cv.height);
+    var d = img.data;
+    for (var i = 0; i < d.length; i += 4) {
+      var v = (Math.random() * 255) | 0;
+      d[i] = d[i + 1] = d[i + 2] = v;
+      d[i + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+    // horizontal tape tears
+    if (Math.random() < 0.55) {
+      var y = (Math.random() * cv.height) | 0;
+      var h = 4 + ((Math.random() * 16) | 0);
+      var dx = ((Math.random() * 44) | 0) - 22;
+      ctx.drawImage(cv, 0, y, cv.width, h, dx, y, cv.width, h);
+    }
+  }
+  (function frame(t) {
+    drawNoise();
+    var tenths = Math.min(99, (((t - t0) / 100) | 0));
+    timeEl.textContent = 'SP 0:00:' + (tenths < 10 ? '0' + tenths : tenths);
+    if (t - t0 < 1200) {
+      requestAnimationFrame(frame);
+    } else if (!navigated) {
+      navigated = true;
+      window.location.href = url;
+    }
+  })(t0);
+}
+</script>
 
 </body>
 </html>

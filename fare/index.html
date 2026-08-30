@@ -536,5 +536,46 @@
   },{threshold:.12});
   document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 </script>
+
+<!-- ============ VCR GLITCH-IN ============ -->
+<style>
+#vcr-in{position:fixed;inset:0;z-index:999;background:#000;overflow:hidden;pointer-events:none;opacity:1;transition:opacity .3s ease;}
+#vcr-in canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;opacity:.92;}
+#vcr-in .scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px);}
+#vcr-in .vig{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 52%,rgba(0,0,0,.85) 100%);}
+#vcr-in .osd{position:absolute;top:22px;left:26px;font-family:'Courier New',monospace;font-weight:700;font-size:clamp(15px,2vw,24px);color:#fff;letter-spacing:.14em;text-shadow:0 0 7px rgba(255,255,255,.75);}
+#vcr-in.done{opacity:0;}
+</style>
+<div id="vcr-in" aria-hidden="true">
+  <canvas id="vcr-in-canvas"></canvas>
+  <div class="scan"></div>
+  <div class="vig"></div>
+  <div class="osd">&#9654; PLAY</div>
+</div>
+<script>
+(function(){
+  var ov = document.getElementById('vcr-in');
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { ov.remove(); return; }
+  var cv = document.getElementById('vcr-in-canvas');
+  var ctx = cv.getContext('2d');
+  cv.width = Math.max(2, Math.floor(window.innerWidth / 3));
+  cv.height = Math.max(2, Math.floor(window.innerHeight / 3));
+  var t0 = performance.now();
+  (function frame(t){
+    var img = ctx.createImageData(cv.width, cv.height), d = img.data;
+    for (var i = 0; i < d.length; i += 4) {
+      var v = (Math.random() * 255) | 0;
+      d[i] = d[i+1] = d[i+2] = v; d[i+3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+    if (Math.random() < 0.55) {
+      var y = (Math.random() * cv.height) | 0, h = 4 + ((Math.random() * 16) | 0), dx = ((Math.random() * 44) | 0) - 22;
+      ctx.drawImage(cv, 0, y, cv.width, h, dx, y, cv.width, h);
+    }
+    if (t - t0 < 700) { requestAnimationFrame(frame); }
+    else { ov.classList.add('done'); setTimeout(function(){ ov.remove(); }, 350); }
+  })(t0);
+})();
+</script>
 </body>
 </html>
